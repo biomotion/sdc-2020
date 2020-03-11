@@ -20,4 +20,4 @@ docker run -it --rm \
        -e ROS_IP=$ROS_IP \
        -v $HOME/.Xauthority:/root/.Xauthority \
        -v /dev:/dev \
-       ros:kinetic-ros-core $BASH_OPTION
+       biomotion/sdc-2020:latest $BASH_OPTION
