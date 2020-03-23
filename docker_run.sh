@@ -1,5 +1,13 @@
 #!/bin/bash
 
+docker_runtime=runc
+if [ "$docker info|grep nvidia" == 0 ]; then
+    echo "no nvidia-docker available"
+else
+	echo "nvidia-docker found"
+	docker_runtime=nvidia
+fi
+
 XAUTH=/tmp/.docker.xauth
 if [ ! -f $XAUTH ]
 then
@@ -29,6 +37,7 @@ fi
 echo "running $BASH_OPTION $BASH_ARGS in docker"
 
 docker run -it --rm \
+        --runtime=$docker_runtime \
         --network host \
         --privileged \
         --name sdc-2020 \
