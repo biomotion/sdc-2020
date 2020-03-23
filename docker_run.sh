@@ -1,7 +1,7 @@
 #!/bin/bash
 
 docker_runtime=runc
-if [ "$docker info|grep nvidia" == 0 ]; then
+if [ "$(docker info|grep nvidia)" == "" ]; then
     echo "no nvidia-docker available"
 else
 	echo "nvidia-docker found"
