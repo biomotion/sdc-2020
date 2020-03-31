@@ -51,5 +51,6 @@ docker run -it --rm \
         -v $HOME/.Xauthority:/root/.Xauthority \
         -v /dev:/dev \
         -v "${PWD}/catkin_ws:/catkin_ws" \
+        -v "${PWD}/bags:/bags" \
         -w /catkin_ws \
         biomotion/sdc-2020:latest $BASH_OPTION
