@@ -50,4 +50,6 @@ docker run -it --rm \
         -e ROS_IP=$ROS_IP \
         -v $HOME/.Xauthority:/root/.Xauthority \
         -v /dev:/dev \
+        -v "${PWD}/catkin_ws:/catkin_ws" \
+        -w /catkin_ws \
         biomotion/sdc-2020:latest $BASH_OPTION
