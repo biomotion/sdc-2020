@@ -47,7 +47,6 @@ docker run -it --rm \
         -v "$XAUTH:$XAUTH" \
         -v "/tmp/.X11-unix:/tmp/.X11-unix" \
         -e ROS_MASTER_URI=$ROS_MASTER_URI \
-        -e ROS_IP=$ROS_IP \
         -v $HOME/.Xauthority:/root/.Xauthority \
         -v /dev:/dev \
         -v "${PWD}/catkin_ws:/catkin_ws" \

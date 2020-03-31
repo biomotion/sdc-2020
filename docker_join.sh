@@ -15,6 +15,5 @@ echo "Joining docker with command: $BASH_OPTION $BASH_ARGS"
 
 docker exec -it \
     -e ROS_MASTER_URI=$ROS_MASTER_URI \
-    -e ROS_IP=$ROS_IP \
     -e DISPLAY=${DISPLAY} \
     sdc-2020 $BASH_OPTION $BASH_ARGS
