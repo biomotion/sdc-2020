@@ -44,7 +44,6 @@ private:
         this->line_vel += (glo_acc - gravity)*(double)time_diff.toNSec()/1e9;
         this->pos += this->line_vel*(double)time_diff.toNSec()/1e9;
 
-
     }
 
     void msg_cb(const sensor_msgs::Imu::ConstPtr& msg){
