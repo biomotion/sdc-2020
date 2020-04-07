@@ -24,5 +24,5 @@ include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
 )
-#add_executable(hw3_0513336 src/imu_odom.cpp)
-#target_link_libraries(hw3_0513336 ${catkin_LIBRARIES})
+add_executable(hw4_node src/ekf_fusion.cpp)
+target_link_libraries(hw4_node ${catkin_LIBRARIES})
