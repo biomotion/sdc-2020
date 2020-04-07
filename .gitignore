@@ -4,3 +4,4 @@ build/
 *.bag
 *.pyc
 .vscode/
+*.zip
