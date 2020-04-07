@@ -23,5 +23,5 @@ include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
 )
-add_executable(hw3_0513336 src/imu_odom.cpp)
-target_link_libraries(hw3_0513336 ${catkin_LIBRARIES})
+add_executable(hw3_node src/imu_odom.cpp)
+target_link_libraries(hw3_node ${catkin_LIBRARIES})
