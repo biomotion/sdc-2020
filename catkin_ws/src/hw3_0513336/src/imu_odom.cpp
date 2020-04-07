@@ -13,6 +13,7 @@ private:
     ros::Subscriber sub_imu;
     ros::Publisher pub_marker;
     uint16_t marker_id;
+    std::vector<geometry_msgs::Point> points;
     //
     //R body to global (3x3)
     Eigen::Matrix3d C;
@@ -33,14 +34,14 @@ private:
         trans(2, 1) = ang_vel.x;
         trans *= (double)time_diff.toNSec()/1e9;
         // std::cout << trans << std::endl;
-        
-        C = C * (Eigen::Matrix3d::Identity() + trans*(sin(sigma)/sigma) + trans*trans*(((double)1-cos(sigma)/sigma*sigma)) );
-        // std::cout << C << std::endl;
+        // std::cout << sigma << std::endl;
+        C = C * (Eigen::Matrix3d::Identity() + trans*(sin(sigma)/sigma) + trans*trans*(((double)1-cos(sigma))/(sigma*sigma)) );
+        std::cout << C << std::endl;
 
     }
     void update_position(const geometry_msgs::Vector3& lin_accel, const ros::Duration time_diff){
         Eigen::Vector3d glo_acc = C * Eigen::Vector3d(lin_accel.x, lin_accel.y, lin_accel.z);
-        std::cout << glo_acc.transpose() << std::endl;
+        // std::cout << glo_acc.transpose() << std::endl;
         this->line_vel += (glo_acc - gravity)*(double)time_diff.toNSec()/1e9;
         this->pos += this->line_vel*(double)time_diff.toNSec()/1e9;
 
@@ -49,7 +50,7 @@ private:
     void msg_cb(const sensor_msgs::Imu::ConstPtr& msg){
         // ROS_INFO("cb");
         // Implement here
-        ros::Time enter_time = ros::Time::now();
+        ros::Time enter_time = msg->header.stamp;
         // std::cout << "ang_vel= \n" << msg->angular_velocity;
         // std::cout << "time_diff = " << enter_time - this->last_enter << std::endl;
         if(last_enter == ros::Time(0)){
@@ -67,18 +68,20 @@ private:
         
         //draw marker
         visualization_msgs::Marker marker;
+        geometry_msgs::Point point;
+        point.x = pos(0); point.y = pos(1); point.z = pos(2);
+        points.push_back(point);
         marker.header.frame_id = "global";
         marker.header.stamp = ros::Time::now();
         marker.ns = "imu_pose";
         marker.id = marker_id++;
-        marker.type = visualization_msgs::Marker::SPHERE;
+        marker.type = visualization_msgs::Marker::LINE_STRIP;
         marker.action = visualization_msgs::Marker::ADD;
-        marker.pose.position.x = pos(0);
-        marker.pose.position.y = pos(1);
-        marker.pose.position.z = pos(2);
+        // marker.pose.position.x = pos(0);
+        // marker.pose.position.y = pos(1);
+        // marker.pose.position.z = pos(2);
+        marker.points = this->points;
         marker.scale.x = 0.1;
-        marker.scale.y = 0.1;
-        marker.scale.z = 0.1;
         marker.color.a = 1.0;
         marker.color.r = 0.0;
         marker.color.g = 0.0;
