@@ -1,0 +1,6 @@
+[submodule "hw5/mahalanobis_3d_multi_object_tracking"]
+	path = hw5/mahalanobis_3d_multi_object_tracking
+	url = https://github.com/eddyhkchiu/mahalanobis_3d_multi_object_tracking
+[submodule "hw5/nuscenes-devkit"]
+	path = hw5/nuscenes-devkit
+	url = https://github.com/nutonomy/nuscenes-devkit.git
