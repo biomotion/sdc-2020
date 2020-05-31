@@ -37,6 +37,7 @@ docker run -it --rm \
         -v "/tmp/.X11-unix:/tmp/.X11-unix" \
         -v $HOME/.Xauthority:/root/.Xauthority \
         -v /dev:/dev \
+	-v /data/datasets/nuscenes/:/data \
         -v "${PWD}:/workspace" \
         -w "/workspace" \
         tracking:latest $BASH_OPTION
